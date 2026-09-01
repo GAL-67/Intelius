@@ -1,5 +1,15 @@
--- Intelius Hub Loader
--- Includes executor compatibility check before loading the game script.
+if not isfolder("InteliusHub") then
+    makefolder("InteliusHub")
+end
+if not isfolder("InteliusHub/themes") then
+    makefolder("InteliusHub/themes")
+end
+
+local themeUrl = "https://raw.githubusercontent.com/GAL-67/Intelius/main/Theme/InteliusTheme.json"
+local themeContent = game:HttpGet(themeUrl)
+
+writefile("InteliusHub/themes/InteliusTheme.json", themeContent)
+writefile("InteliusHub/themes/default.txt", "InteliusTheme")
 
 if not game:IsLoaded() then
     game.Loaded:Wait()
@@ -8,10 +18,8 @@ end
 local HUB_NAME = "Intelius Hub"
 local BASE_URL = "https://raw.githubusercontent.com/GAL-67/Intelius/main/allgames/"
 
--- List of unsupported executors (case-insensitive)
 local UNSUPPORTED_EXECUTORS = { "Solara", "Xeno" }
 
--- Check executor compatibility
 if identifyexecutor then
     local executorName = tostring(identifyexecutor()):lower()
     for _, unsupported in ipairs(UNSUPPORTED_EXECUTORS) do
@@ -25,7 +33,6 @@ if identifyexecutor then
     end
 end
 
--- Map of creator IDs to their respective script files
 local supportedGames = {
     [8818124] = "violence-district.lua",
 }
