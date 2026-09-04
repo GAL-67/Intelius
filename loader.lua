@@ -35,6 +35,7 @@ end
 
 local supportedGames = {
     [8818124] = "violence-district.lua",
+    [7528333365] = "anime-astral.lua",
 }
 
 local creatorId = game.CreatorId
